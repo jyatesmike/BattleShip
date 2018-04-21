@@ -115,16 +115,16 @@ namespace BattleShip
         {
             bool shipCanGoRight = true;
 
-			//Because its horizontal we just go incrementally through grid array
-			for (int i = startPosition; i < (startPosition + ship.getSize()); i++)
-			{
-				if (!values[i].Equals('.'))
-				{
+            //Because its horizontal we just go incrementally through grid array
+            for (int i = startPosition; i < (startPosition + ship.getSize()); i++)
+            {
+                if (!values[i].Equals('.'))
+                {
                     shipCanGoRight = false;
-					Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
-					break;
-				}
-			}
+                    Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
+                    break;
+                }
+            }
 
             return shipCanGoRight;
         }
@@ -139,18 +139,18 @@ namespace BattleShip
         {
             bool shipCanGoLeft = true;
 
-			//Because its horizontal we just go incrementally through grid array
-			for (int i = startPosition; i > (startPosition - ship.getSize()); i--)
-			{
-				if (!values[i].Equals('.'))
-				{
+            //Because its horizontal we just go incrementally through grid array
+            for (int i = startPosition; i > (startPosition - ship.getSize()); i--)
+            {
+                if (!values[i].Equals('.'))
+                {
                     shipCanGoLeft = false;
-					Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
-					break;
-				}
-			}
+                    Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
+                    break;
+                }
+            }
 
-			return shipCanGoLeft;
+            return shipCanGoLeft;
         }
 
         /// <summary>
@@ -163,16 +163,16 @@ namespace BattleShip
         {
             bool shipCanGoDown = true;
 
-			//Because its vertical we check every position in column by adding row size
-			for (int i = startPosition; i <= (startPosition + ((ship.getSize() - 1) * this.xSize)); i = i + xSize)
-			{
-				if (!values[i].Equals('.'))
-				{
+            //Because its vertical we check every position in column by adding row size
+            for (int i = startPosition; i <= (startPosition + ((ship.getSize() - 1) * this.xSize)); i = i + xSize)
+            {
+                if (!values[i].Equals('.'))
+                {
                     shipCanGoDown = false;
-					Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
-					break;
-				}
-			}
+                    Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
+                    break;
+                }
+            }
 
             return shipCanGoDown;
         }
@@ -187,16 +187,16 @@ namespace BattleShip
         {
             bool shipCanGoUp = true;
 
-			//Because its horizontal we just go incrementally through grid array
-			for (int i = startPosition; i >= (startPosition - ((ship.getSize() - 1) * this.xSize)); i = i - xSize)
-			{
-				if (!values[i].Equals('.'))
-				{
+            //Because its horizontal we just go incrementally through grid array
+            for (int i = startPosition; i >= (startPosition - ((ship.getSize() - 1) * this.xSize)); i = i - xSize)
+            {
+                if (!values[i].Equals('.'))
+                {
                     shipCanGoUp = false;
-					Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
-					break;
-				}
-			}
+                    Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
+                    break;
+                }
+            }
 
             return shipCanGoUp;
         }
@@ -210,41 +210,41 @@ namespace BattleShip
         /// <param name="col">Col.</param>
         private void placeShipGoingRight(int startPosition, Ship ship, int row, int col)
         {
-			for (int i = startPosition; i < (startPosition + ship.getSize()); i++)
-			{
-				values[i] = ship.getMarker();
+            for (int i = startPosition; i < (startPosition + ship.getSize()); i++)
+            {
+                values[i] = ship.getMarker();
 
-				if (avoidAdjacentShips)
-				{
-					//Mark area above ship
-					if (row != 0)
-					{
-						values[i - this.xSize] = '!';
-					}
+                if (avoidAdjacentShips)
+                {
+                    //Mark area above ship
+                    if (row != 0)
+                    {
+                        values[i - this.xSize] = '!';
+                    }
 
-					//Mark area below ship
-					if (row != this.ySize - 1)
-					{
-						values[i + this.xSize] = '!';
-					}
+                    //Mark area below ship
+                    if (row != this.ySize - 1)
+                    {
+                        values[i + this.xSize] = '!';
+                    }
 
-				}
-			}
+                }
+            }
 
-			if (avoidAdjacentShips)
-			{
-				//Mark area to left of ship
-				if (col > 0)
-				{
-					values[startPosition - 1] = '!';
-				}
+            if (avoidAdjacentShips)
+            {
+                //Mark area to left of ship
+                if (col > 0)
+                {
+                    values[startPosition - 1] = '!';
+                }
 
-				//Mark area to right of ship
-				if (col + ship.getSize() < this.xSize)
-				{
-					values[startPosition + ship.getSize()] = '!';
-				}
-			}
+                //Mark area to right of ship
+                if (col + ship.getSize() < this.xSize)
+                {
+                    values[startPosition + ship.getSize()] = '!';
+                }
+            }
         }
 
         /// <summary>
@@ -256,41 +256,41 @@ namespace BattleShip
         /// <param name="col">Col.</param>
         private void placeShipGoingLeft(int startPosition, Ship ship, int row, int col)
         {
-			for (int i = startPosition; i > (startPosition - ship.getSize()); i--)
-			{
-				values[i] = ship.getMarker();
+            for (int i = startPosition; i > (startPosition - ship.getSize()); i--)
+            {
+                values[i] = ship.getMarker();
 
-				if (avoidAdjacentShips)
-				{
-					//Mark area above ship
-					if (row != 0)
-					{
-						values[i - this.xSize] = '!';
-					}
+                if (avoidAdjacentShips)
+                {
+                    //Mark area above ship
+                    if (row != 0)
+                    {
+                        values[i - this.xSize] = '!';
+                    }
 
-					//Mark area below ship
-					if (row != this.ySize - 1)
-					{
-						values[i + this.xSize] = '!';
-					}
+                    //Mark area below ship
+                    if (row != this.ySize - 1)
+                    {
+                        values[i + this.xSize] = '!';
+                    }
 
-				}
-			}
+                }
+            }
 
-			if (avoidAdjacentShips)
-			{
-				//Mark area to left of ship
-				if (col - ship.getSize() >= 0)
-				{
-					values[startPosition - ship.getSize()] = '!';
-				}
+            if (avoidAdjacentShips)
+            {
+                //Mark area to left of ship
+                if (col - ship.getSize() >= 0)
+                {
+                    values[startPosition - ship.getSize()] = '!';
+                }
 
-				//Mark area to right of ship
-				if (col < this.xSize - 1)
-				{
-					values[startPosition + 1] = '!';
-				}
-			}
+                //Mark area to right of ship
+                if (col < this.xSize - 1)
+                {
+                    values[startPosition + 1] = '!';
+                }
+            }
         }
 
         /// <summary>
@@ -302,41 +302,41 @@ namespace BattleShip
         /// <param name="col">Col.</param>
         private void placeShipGoingDown(int startPosition, Ship ship, int row, int col)
         {
-			for (int i = startPosition; i <= (startPosition + ((ship.getSize() - 1) * this.xSize)); i = i + xSize)
-			{
-				values[i] = ship.getMarker();
+            for (int i = startPosition; i <= (startPosition + ((ship.getSize() - 1) * this.xSize)); i = i + xSize)
+            {
+                values[i] = ship.getMarker();
 
-				if (avoidAdjacentShips)
-				{
-					//Mark area to left of ship
-					if (col != 0)
-					{
-						values[i - 1] = '!';
-					}
+                if (avoidAdjacentShips)
+                {
+                    //Mark area to left of ship
+                    if (col != 0)
+                    {
+                        values[i - 1] = '!';
+                    }
 
-					//Mark area to right of ship
-					if (col != this.xSize - 1)
-					{
-						values[i + 1] = '!';
-					}
-				}
-			}
+                    //Mark area to right of ship
+                    if (col != this.xSize - 1)
+                    {
+                        values[i + 1] = '!';
+                    }
+                }
+            }
 
-			if (avoidAdjacentShips)
-			{
-				//Mark area above ship
-				if (row > 0)
-				{
-					values[startPosition - this.xSize] = '!';
-				}
+            if (avoidAdjacentShips)
+            {
+                //Mark area above ship
+                if (row > 0)
+                {
+                    values[startPosition - this.xSize] = '!';
+                }
 
-				//Mark area below ship
-				if (row != this.ySize - 1)
-				{
-					values[startPosition + (ship.getSize() * this.xSize)] = '!';
-				}
-			}
-		}
+                //Mark area below ship
+                if (row != this.ySize - 1)
+                {
+                    values[startPosition + (ship.getSize() * this.xSize)] = '!';
+                }
+            }
+        }
 
         /// <summary>
         /// Places the ship going up.
@@ -347,40 +347,40 @@ namespace BattleShip
         /// <param name="col">Col.</param>
         private void placeShipGoingUp(int startPosition, Ship ship, int row, int col)
         {
-			for (int i = startPosition; i >= (startPosition - ((ship.getSize() - 1) * this.xSize)); i = i - xSize)
-			{
-				values[i] = ship.getMarker();
+            for (int i = startPosition; i >= (startPosition - ((ship.getSize() - 1) * this.xSize)); i = i - xSize)
+            {
+                values[i] = ship.getMarker();
 
-				if (avoidAdjacentShips)
-				{
-					//Mark area to left of ship
-					if (col != 0)
-					{
-						values[i - 1] = '!';
-					}
+                if (avoidAdjacentShips)
+                {
+                    //Mark area to left of ship
+                    if (col != 0)
+                    {
+                        values[i - 1] = '!';
+                    }
 
-					//Mark area to right of ship
-					if (col != this.xSize - 1)
-					{
-						values[i + 1] = '!';
-					}
-				}
-			}
+                    //Mark area to right of ship
+                    if (col != this.xSize - 1)
+                    {
+                        values[i + 1] = '!';
+                    }
+                }
+            }
 
-			if (avoidAdjacentShips)
-			{
-				//Mark area below ship (start position is at bottom of ship)
-				if (row < this.ySize - 1)
-				{
-					values[startPosition + this.xSize] = '!';
-				}
+            if (avoidAdjacentShips)
+            {
+                //Mark area below ship (start position is at bottom of ship)
+                if (row < this.ySize - 1)
+                {
+                    values[startPosition + this.xSize] = '!';
+                }
 
-				//Mark area above top of ship
-				if (row - ship.getSize() > 0)
-				{
-					values[startPosition - (ship.getSize() * this.xSize)] = '!';
-				}
-			}
+                //Mark area above top of ship
+                if (row - ship.getSize() > 0)
+                {
+                    values[startPosition - (ship.getSize() * this.xSize)] = '!';
+                }
+            }
         }
 
         /// <summary>
@@ -419,7 +419,8 @@ namespace BattleShip
                     {
                         //Place ship here as it fits and no spots already occupied by another ship
                         placeShipGoingRight(startPosition, ship, row, col);
-                    }else
+                    }
+                    else
                     {
                         spotTaken = true;
                     }
