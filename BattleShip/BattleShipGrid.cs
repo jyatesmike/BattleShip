@@ -35,8 +35,6 @@ namespace BattleShip
             this.ships = ships;
             this.avoidAdjacentShips = avoidAdjacentShips;
 
-            values = new char[this.size];
-
             values = Enumerable.Repeat('.', this.size).ToArray();
 
             random = new Random(Guid.NewGuid().GetHashCode());
