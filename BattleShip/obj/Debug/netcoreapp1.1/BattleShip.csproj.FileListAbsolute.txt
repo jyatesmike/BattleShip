@@ -1,9 +1,0 @@
-/Users/jamesyates/Projects/BattleShip/BattleShip/bin/Debug/netcoreapp1.1/BattleShip.deps.json
-/Users/jamesyates/Projects/BattleShip/BattleShip/bin/Debug/netcoreapp1.1/BattleShip.runtimeconfig.json
-/Users/jamesyates/Projects/BattleShip/BattleShip/bin/Debug/netcoreapp1.1/BattleShip.runtimeconfig.dev.json
-/Users/jamesyates/Projects/BattleShip/BattleShip/bin/Debug/netcoreapp1.1/BattleShip.dll
-/Users/jamesyates/Projects/BattleShip/BattleShip/bin/Debug/netcoreapp1.1/BattleShip.pdb
-/Users/jamesyates/Projects/BattleShip/BattleShip/obj/Debug/netcoreapp1.1/BattleShip.csprojResolveAssemblyReference.cache
-/Users/jamesyates/Projects/BattleShip/BattleShip/obj/Debug/netcoreapp1.1/BattleShip.AssemblyInfo.cs
-/Users/jamesyates/Projects/BattleShip/BattleShip/obj/Debug/netcoreapp1.1/BattleShip.dll
-/Users/jamesyates/Projects/BattleShip/BattleShip/obj/Debug/netcoreapp1.1/BattleShip.pdb
