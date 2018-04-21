@@ -47,9 +47,10 @@ namespace BattleShip
         /// </summary>
         public void display()
         {
-            for (int i = 0; i < this.size; i++){
-                
-                if(i != 0 && ( ( i + 1 ) % this.xSize == 0) )
+            for (int i = 0; i < this.size; i++)
+            {
+
+                if (i != 0 && ((i + 1) % this.xSize == 0))
                 {
                     Console.WriteLine(values[i].Equals('!') ? '.' : values[i]);
                 }
@@ -97,7 +98,7 @@ namespace BattleShip
         /// </summary>
         public void placeShips()
         {
-            foreach(Ship ship in ships)
+            foreach (Ship ship in ships)
             {
                 Debug.WriteLine("Placing ship {0} of size {1} on the grid", ship.getName(), ship.getSize());
                 placeShip(ship);
@@ -130,16 +131,16 @@ namespace BattleShip
             Debug.WriteLine("Ship Direction is " + shipOrientation.ToString());
             Debug.WriteLine("Row={0}, Col={1}", row, col);
 
-            if(shipOrientation.Equals(Orientation.Horizontal))
+            if (shipOrientation.Equals(Orientation.Horizontal))
             {
                 //See if ship fits going right
-                if(ship.getSize() + col <= this.xSize)
+                if (ship.getSize() + col <= this.xSize)
                 {
                     //See if spots already taken
                     //Because its horizontal we just go incrementally through grid array
-                    for (int i = startPosition; i < ( startPosition + ship.getSize() ); i++)
+                    for (int i = startPosition; i < (startPosition + ship.getSize()); i++)
                     {
-                        if(!values[i].Equals('.'))
+                        if (!values[i].Equals('.'))
                         {
                             spotTaken = true;
                             Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
@@ -147,23 +148,23 @@ namespace BattleShip
                         }
                     }
 
-					if (!spotTaken)
-					{
+                    if (!spotTaken)
+                    {
                         //Place ship here as it fits and no spots already occupied by another ship
                         for (int i = startPosition; i < (startPosition + ship.getSize()); i++)
                         {
                             values[i] = ship.getMarker();
 
-                            if(avoidAdjacentShips)
+                            if (avoidAdjacentShips)
                             {
                                 //Mark area above ship
-                                if(row != 0)
+                                if (row != 0)
                                 {
                                     values[i - this.xSize] = '!';
                                 }
 
                                 //Mark area below ship
-                                if(row != this.ySize - 1)
+                                if (row != this.ySize - 1)
                                 {
                                     values[i + this.xSize] = '!';
                                 }
@@ -180,188 +181,191 @@ namespace BattleShip
                             }
 
                             //Mark area to right of ship
-                            if(col + ship.getSize() < this.xSize)
+                            if (col + ship.getSize() < this.xSize)
                             {
                                 values[startPosition + ship.getSize()] = '!';
                             }
                         }
 
-					}
+                    }
                 }
                 //otherwise, it should always fit going left
-                else{
+                else
+                {
 
-					//See if spots already taken
-					//Because its horizontal we just go incrementally through grid array
-					for (int i = startPosition; i > (startPosition - ship.getSize()); i--)
-					{
-						if (!values[i].Equals('.'))
-						{
-							spotTaken = true;
+                    //See if spots already taken
+                    //Because its horizontal we just go incrementally through grid array
+                    for (int i = startPosition; i > (startPosition - ship.getSize()); i--)
+                    {
+                        if (!values[i].Equals('.'))
+                        {
+                            spotTaken = true;
                             Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
-							break;
-						}
-					}
+                            break;
+                        }
+                    }
 
-					if (!spotTaken)
-					{
-						//Place ship here as it fits and no spots already occupied by another ship
-						for (int i = startPosition; i > (startPosition - ship.getSize()); i--)
-						{
-							values[i] = ship.getMarker();
+                    if (!spotTaken)
+                    {
+                        //Place ship here as it fits and no spots already occupied by another ship
+                        for (int i = startPosition; i > (startPosition - ship.getSize()); i--)
+                        {
+                            values[i] = ship.getMarker();
 
-							if (avoidAdjacentShips)
-							{
-								//Mark area above ship
-								if (row != 0)
-								{
-									values[i - this.xSize] = '!';
-								}
+                            if (avoidAdjacentShips)
+                            {
+                                //Mark area above ship
+                                if (row != 0)
+                                {
+                                    values[i - this.xSize] = '!';
+                                }
 
                                 //Mark area below ship
-								if (row != this.ySize - 1)
-								{
-									values[i + this.xSize] = '!';
-								}
+                                if (row != this.ySize - 1)
+                                {
+                                    values[i + this.xSize] = '!';
+                                }
 
-							}
-						}
+                            }
+                        }
 
-						if (avoidAdjacentShips)
-						{
-							//Mark area to left of ship
-							if (col - ship.getSize() >= 0)
-							{
-								values[startPosition - ship.getSize()] = '!';
-							}
+                        if (avoidAdjacentShips)
+                        {
+                            //Mark area to left of ship
+                            if (col - ship.getSize() >= 0)
+                            {
+                                values[startPosition - ship.getSize()] = '!';
+                            }
 
-							//Mark area to right of ship
-							if (col  < this.xSize-1)
-							{
-								values[startPosition + 1] = '!';
-							}
-						}
-					}
+                            //Mark area to right of ship
+                            if (col < this.xSize - 1)
+                            {
+                                values[startPosition + 1] = '!';
+                            }
+                        }
+                    }
                 }
             }
             else
             {
-				//See if ship fits going down
-				if (ship.getSize() + row < this.ySize)
+                //See if ship fits going down
+                if (ship.getSize() + row < this.ySize)
                 {
-					//See if spots already taken
-					//Because its vertical we check every position in column by adding row size
+                    //See if spots already taken
+                    //Because its vertical we check every position in column by adding row size
                     for (int i = startPosition; i <= (startPosition + ((ship.getSize() - 1) * this.xSize)); i = i + xSize)
-					{
-						if (!values[i].Equals('.'))
-						{
-							spotTaken = true;
+                    {
+                        if (!values[i].Equals('.'))
+                        {
+                            spotTaken = true;
                             Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
-							break;
-						}
-					}
+                            break;
+                        }
+                    }
 
-					if (!spotTaken)
-					{
-						//Place ship here as it fits and no spots already occupied by another ship
-						for (int i = startPosition; i <= (startPosition + ((ship.getSize() - 1) * this.xSize)); i = i + xSize)
-						{
-							values[i] = ship.getMarker();
+                    if (!spotTaken)
+                    {
+                        //Place ship here as it fits and no spots already occupied by another ship
+                        for (int i = startPosition; i <= (startPosition + ((ship.getSize() - 1) * this.xSize)); i = i + xSize)
+                        {
+                            values[i] = ship.getMarker();
 
-                            if(avoidAdjacentShips)
+                            if (avoidAdjacentShips)
                             {
                                 //Mark area to left of ship
-                                if(col != 0)
+                                if (col != 0)
                                 {
                                     values[i - 1] = '!';
                                 }
 
                                 //Mark area to right of ship
-                                if(col != this.xSize -1)
+                                if (col != this.xSize - 1)
                                 {
                                     values[i + 1] = '!';
                                 }
                             }
-						}
+                        }
 
-                        if(avoidAdjacentShips)
+                        if (avoidAdjacentShips)
                         {
                             //Mark area above ship
-                            if(row > 0)
+                            if (row > 0)
                             {
                                 values[startPosition - this.xSize] = '!';
                             }
 
                             //Mark area below ship
-                            if(row != this.ySize - 1)
+                            if (row != this.ySize - 1)
                             {
-                                values[startPosition + (ship.getSize()*this.xSize)] = '!';
+                                values[startPosition + (ship.getSize() * this.xSize)] = '!';
                             }
                         }
-					}
-				}
-				//otherwise, it should always fit going up
-				else
-				{
-					//See if spots already taken
-					//Because its horizontal we just go incrementally through grid array
-					for (int i = startPosition; i >= (startPosition - ((ship.getSize() - 1) * this.xSize)); i = i - xSize)
-					{
-						if (!values[i].Equals('.'))
-						{
-							spotTaken = true;
+                    }
+                }
+                //otherwise, it should always fit going up
+                else
+                {
+                    //See if spots already taken
+                    //Because its horizontal we just go incrementally through grid array
+                    for (int i = startPosition; i >= (startPosition - ((ship.getSize() - 1) * this.xSize)); i = i - xSize)
+                    {
+                        if (!values[i].Equals('.'))
+                        {
+                            spotTaken = true;
                             Debug.WriteLine("Ship {0} had collision while trying to place", ship.getName());
-							break;
-						}
-					}
+                            break;
+                        }
+                    }
 
-					if (!spotTaken)
-					{
-						//Place ship here as it fits and no spots already occupied by another ship
-						for (int i = startPosition; i >= (startPosition - ((ship.getSize() - 1) * this.xSize)); i = i - xSize)
-						{
-							values[i] = ship.getMarker();
+                    if (!spotTaken)
+                    {
+                        //Place ship here as it fits and no spots already occupied by another ship
+                        for (int i = startPosition; i >= (startPosition - ((ship.getSize() - 1) * this.xSize)); i = i - xSize)
+                        {
+                            values[i] = ship.getMarker();
 
-							if (avoidAdjacentShips)
-							{
+                            if (avoidAdjacentShips)
+                            {
                                 //Mark area to left of ship
-								if (col != 0)
-								{
-									values[i - 1] = '!';
-								}
+                                if (col != 0)
+                                {
+                                    values[i - 1] = '!';
+                                }
 
                                 //Mark area to right of ship
-								if (col != this.xSize - 1)
-								{
-									values[i + 1] = '!';
-								}
-							}
-						}
+                                if (col != this.xSize - 1)
+                                {
+                                    values[i + 1] = '!';
+                                }
+                            }
+                        }
 
-						if (avoidAdjacentShips)
-						{
+                        if (avoidAdjacentShips)
+                        {
                             //Mark area below ship (start position is at bottom of ship)
-							if (row < this.ySize - 1)
-							{
-								values[startPosition + this.xSize] = '!';
-							}
+                            if (row < this.ySize - 1)
+                            {
+                                values[startPosition + this.xSize] = '!';
+                            }
 
                             //Mark area above top of ship
-							if (row - ship.getSize() > 0)
-							{
-								values[startPosition - (ship.getSize() * this.xSize)] = '!';
-							}
-						}
-					}
-				}
+                            if (row - ship.getSize() > 0)
+                            {
+                                values[startPosition - (ship.getSize() * this.xSize)] = '!';
+                            }
+                        }
+                    }
+                }
             }
 
 
             //If ship had collision, try again
-            if(spotTaken)
+            if (spotTaken)
             {
                 return placeShip(ship);
-            }else{
+            }
+            else
+            {
                 return true;
             }
 
