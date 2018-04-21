@@ -109,7 +109,7 @@ namespace BattleShip
         /// Places the ship.
         /// This algorithm gets a random starting coordinate and orientation.
         /// Then, it checks which direction will not run off the board and picks that direction.  Preference is
-        /// left or down.  Alternitive if those run off board is right or up.
+        /// right or down.  Alternitive if those run off board is left or up.
         /// It then attemps to occupy all the spaces for the ship.  If it collides with another ship 
         /// (or its surrounding area when configured as such), it will make recursive call to try again.
         /// If avoidAdjacentShips is set, it will mark area around ship so that other ships will not occupy its surrounding
